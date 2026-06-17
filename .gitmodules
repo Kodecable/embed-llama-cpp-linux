@@ -1,0 +1,6 @@
+[submodule "llama-cpp/src"]
+	path = llama-cpp/src
+	url = https://github.com/ggml-org/llama.cpp.git
+[submodule "openblas/src"]
+	path = openblas/src
+	url = https://github.com/OpenMathLib/OpenBLAS.git
