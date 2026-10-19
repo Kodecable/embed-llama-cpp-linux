@@ -19,6 +19,13 @@ else
     EXTRA_DEBUG_FLAGS=()
 fi
 
+LLAMA_LLGUIDANCE="${LLAMA_LLGUIDANCE:-ON}"
+if [[ "$LLAMA_LLGUIDANCE" == "ON" ]] && ! command -v cargo >/dev/null 2>&1; then
+    echo "[llama-build] cargo not found, installing rustup ..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain stable
+    source "$HOME/.cargo/env"
+fi
+
 rm -rf build installed
 mkdir build
 cd build
@@ -49,6 +56,7 @@ cmake \
     -DGGML_VULKAN=ON \
     -DGGML_BACKEND_DL=ON \
     -DGGML_LTO="${GGML_LTO}" \
+    -DLLAMA_LLGUIDANCE="${LLAMA_LLGUIDANCE}" \
     -DLLAMA_CURL=OFF \
     -DBLAS_LIBRARIES="$(realpath ../../openblas/installed/lib/libopenblas.so.0.3)" \
     -DBLAS_INCLUDE_DIRS="$(realpath ../../openblas/installed/include/)" \
