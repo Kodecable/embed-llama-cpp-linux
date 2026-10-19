@@ -8,10 +8,10 @@ llama.cpp 使用 `blas` 和 `vulkan` 后端。
 注意：脚本均为在 sniper sdk 容器里运行设计。不适用于其他环境或非一次性环境。
 
 版本：
- - steamrt-sniper  3.0.20250826.159138
+ - steamrt-sniper  3.0.20260928.262393
  - OpenBLAS        由 git submodule 管理
  - llama.cpp       由 git submodule 管理
- - vulkansdk       1.4.321.1
+ - vulkansdk       1.4.321.1（勿升级，见下方说明）
  
 ## 获取环境/源代码
 
@@ -26,6 +26,8 @@ git submodule update --init --recursive
 ```text
 ./vulkan-sdk/setup-env.sh
 ```
+
+注意：较新的 vulkansdk（已验证 1.4.363.0）里预编译的 `glslc` 需要 glibc 2.34 和 `GLIBCXX_3.4.29`，而 steamrt sniper 只有 glibc 2.31，运行 `glslc` 会直接报错，导致 llama.cpp 的 Vulkan shader 全部编译失败。因此这里固定使用 1.4.321.1，升级前请先确认其 `glslc` 能在 sniper 容器里运行。此外，新版 `setup-env.sh` 读取 `$1`，在 `set -u` 下需带参数调用（如 `--set-dep-ld`）。
 
 ## 编译/安装
 

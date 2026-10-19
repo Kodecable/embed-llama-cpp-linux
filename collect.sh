@@ -15,7 +15,7 @@ mkdir output/bin output/lib output/include output/embed_lib
 cp -r openblas/installed/* output
 cp -r llama-cpp/installed/* output
 
-rm output/bin/test*
+rm -f output/bin/test*
 
 if ! command -v "patchelf" >/dev/null 2>&1; then
     if ! apt-get install --yes patchelf; then

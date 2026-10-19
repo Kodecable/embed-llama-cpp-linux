@@ -58,6 +58,7 @@ cmake \
     -DGGML_LTO="${GGML_LTO}" \
     -DLLAMA_LLGUIDANCE="${LLAMA_LLGUIDANCE}" \
     -DLLAMA_CURL=OFF \
+    -DLLAMA_BUILD_TESTS=OFF \
     -DBLAS_LIBRARIES="$(realpath ../../openblas/installed/lib/libopenblas.so.0.3)" \
     -DBLAS_INCLUDE_DIRS="$(realpath ../../openblas/installed/include/)" \
     "${EXTRA_DEBUG_FLAGS[@]}" \
